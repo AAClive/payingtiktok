@@ -95,7 +95,7 @@ class TiktokBot:
                             driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
                             time.sleep(2)
                             driver.switch_to.window(driver.window_handles[0])
-                            time.sleep(60)
+                            time.sleep(30)
                             recvtext=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/messages/section/div/div/div/table/tbody/tr[1]/td[3]').text
 
                             if recvtext.startswith("[Tik"):
@@ -131,9 +131,15 @@ bot.Fr()
 bot.phone()
 bot.tiktok()
 driver.switch_to.window(driver.window_handles[1])
+recvtext=str(TiktokBot.recvtext).split()
+for nui in recvtext:
+    try:
+        nui=int(nui)
+    except:
+        pass
 while True:
     try:
-        driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/div/input').send_keys(TiktokBot.recvtext[9:15])
+        driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/div/input').send_keys(nui)
         break
     except:
         pass
