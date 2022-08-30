@@ -95,7 +95,9 @@ class TiktokBot:
                             driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
                             time.sleep(2)
                             driver.switch_to.window(driver.window_handles[0])
-                            time.sleep(30)
+                            for _ in range(50):
+                                time.sleep(2)
+                                driver.refresh()
                             recvtext=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/messages/section/div/div/div/table/tbody/tr[1]/td[3]').text
 
                             if recvtext.startswith("[Tik"):
