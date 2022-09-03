@@ -23,12 +23,27 @@ async def countdown(t):
             break
 
 class TwitterBot:
-    def __init__(self):
-        pass
-
+    def Fr(self):
+        driver = uc.Chrome(use_subprocess=True)
+        orig_url="https://quackr.io/temporary-numbers/united-kingdom"
+        driver.get("https://quackr.io/temporary-numbers/united-kingdom")
+        #set to "self"
+        self.vaildnumbers=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/h4[1]').text
+        self.vaildnumbers=self.vaildnumbers.split()
+        self.vaildnumbers=self.vaildnumbers[0]
+        self.vaildnumbers=int(self.vaildnumbers)
+        while True:
+            try:
+                self.phone=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[1]/number-card/div/p[2]/a').text
+                break
+            except:
+                pass
+        
+  
 class TiktokBot:
         def __init__(self):
             global recvtext
+            global capt
         def Fr(self):
             driver = uc.Chrome(use_subprocess=True)
             orig_url="https://quackr.io/temporary-numbers/united-kingdom"
@@ -100,6 +115,7 @@ class TiktokBot:
                     if self.phonefailed:
 
                         for number in range(self.vaildnumbers):
+                            global capt
                             if capt:
                                 driver.get("https://quackr.io/temporary-numbers/united-kingdom/")
                                 time.sleep(7)
@@ -132,7 +148,6 @@ class TiktokBot:
                                 time.sleep(3)
                             try:
                                 driver.find_element(By.XPATH,'//*[@id="captcha_container"]/div/div[2]')
-                                global capt
                                 capt=True
                                 driver.switch_to.window(driver.window_handles[0])
                                 time.sleep(1)
@@ -186,7 +201,8 @@ class TiktokBot:
                             asyncio.ensure_future(finding_verification())
                 return go_through_the_vaildnumbers()
 social_in=input("[SOCIAL] ")
-if social_in.lower().startswith("ti"):
+print(social_in.lower())
+if "ti" in social_in:
     bot=TiktokBot()
     bot.Fr()
     bot.phone()
@@ -212,6 +228,8 @@ if social_in.lower().startswith("ti"):
         except:
             pass
     driver.find_element(By.XPATH,'/html/body/tiktok-cookie-banner//div/div[2]/button[2]').click()
-if social_in.lower().startswith("tw"):
-    pass
+if "tw" in social_in:
+    bot=TwitterBot()
+    bot.Fr()
+    
 input()
