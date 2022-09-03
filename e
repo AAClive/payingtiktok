@@ -24,21 +24,21 @@ async def countdown(t):
 
 class TwitterBot:
     def Fr(self):
-        driver = uc.Chrome(use_subprocess=True)
+        pdriver = uc.Chrome(use_subprocess=True)
         orig_url="https://quackr.io/temporary-numbers/united-kingdom"
         driver.get("https://quackr.io/temporary-numbers/united-kingdom")
         #set to "self"
-        self.vaildnumbers=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/h4[1]').text
+        self.vaildnumbers=pdriver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/h4[1]').text
         self.vaildnumbers=self.vaildnumbers.split()
         self.vaildnumbers=self.vaildnumbers[0]
         self.vaildnumbers=int(self.vaildnumbers)
         while True:
             try:
-                self.phone=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[1]/number-card/div/p[2]/a').text
+                self.phone=pdriver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[1]/number-card/div/p[2]/a').text
                 break
             except:
                 pass
-        
+        driver.get("https://twitter.com/?lang=en-gb")
   
 class TiktokBot:
         def __init__(self):
