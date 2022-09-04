@@ -26,8 +26,7 @@ class TwitterBot:
     def Fr(self):
         pdriver = uc.Chrome(use_subprocess=True)
         orig_url="https://quackr.io/temporary-numbers/united-kingdom"
-        driver.get("https://quackr.io/temporary-numbers/united-kingdom")
-        #set to "self"
+        pdriver.get("https://quackr.io/temporary-numbers/united-kingdom")
         self.vaildnumbers=pdriver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/h4[1]').text
         self.vaildnumbers=self.vaildnumbers.split()
         self.vaildnumbers=self.vaildnumbers[0]
@@ -39,7 +38,11 @@ class TwitterBot:
             except:
                 pass
         driver.get("https://twitter.com/?lang=en-gb")
-  
+        #//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[1]/number-card/div/p[2]/a
+        #//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[2]/number-card/div/p[2]/a
+        for line in range(int(self.vaildnumbers)):
+            pdriver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{line}]/number-card/div/p[2]/a').click()
+            
 class TiktokBot:
         def __init__(self):
             global recvtext
