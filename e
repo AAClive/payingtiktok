@@ -37,12 +37,37 @@ class TwitterBot:
                 break
             except:
                 pass
-        driver.get("https://twitter.com/?lang=en-gb")
+        driver.get("https://twitter.com/i/flow/signup")
+        #//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[0]/number-card/div/p[2]/a
         #//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[1]/number-card/div/p[2]/a
         #//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[2]/number-card/div/p[2]/a
+        ndriver=uc.Chrome(use_subprocess=True)
         for line in range(int(self.vaildnumbers)):
-            pdriver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{line}]/number-card/div/p[2]/a').click()
-            
+            pdriver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{line + 1}]/number-card/div/p[2]/a').click()
+            ndriver.get("https://www.behindthename.com/random/random.php?gender=both&number=1&sets=1&surname=&randomsurname=yes&norare=yes&nodiminutives=yes&all=yes")
+            time.sleep(3)
+            driver.find_element(By.XPATH,'//*[@id="__cmp_body"]/div/div/div[2]/a[2]/span').click()
+            while True:
+                try:
+                    self.name=ndriver.find_element(By.XPATH,'/html/body/div[2]/div/div/center/div[1]').text
+                    break
+                except:
+                    pass
+            self.name=str(self.name.split())
+            def twphone(self):
+                while True:
+                    try:
+                        self.current_phone=pdriver.find_element(By.XPATH,'/html/body/app-root/div/div[1]/main/messages/section/div/div/div/h1').text
+                        break
+                    except:
+                        pass
+            twphone(TwitterBot)
+            while True:
+                try:
+                    [driver.find_element(By.XPATH,'/html/body/div/div/div/div[1]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[2]/div[1]/label/div/div[2]/div/input').send_keys(part) for part in self.name]
+                    break
+                except Exception as e:
+                    print(e)
 class TiktokBot:
         def __init__(self):
             global recvtext
