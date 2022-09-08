@@ -19,55 +19,9 @@ async def countdown(t):
         await asyncio.sleep(1)
         t -= 1
         if timer=="00:01":
-            TiktokBot.stopwatch=False
+            stopwatch=False
             break
 
-class TwitterBot:
-    def Fr(self):
-        pdriver = uc.Chrome(use_subprocess=True)
-        orig_url="https://quackr.io/temporary-numbers/united-kingdom"
-        pdriver.get("https://quackr.io/temporary-numbers/united-kingdom")
-        self.vaildnumbers=pdriver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/h4[1]').text
-        self.vaildnumbers=self.vaildnumbers.split()
-        self.vaildnumbers=self.vaildnumbers[0]
-        self.vaildnumbers=int(self.vaildnumbers)
-        while True:
-            try:
-                self.phone=pdriver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[1]/number-card/div/p[2]/a').text
-                break
-            except:
-                pass
-        driver.get("https://twitter.com/i/flow/signup")
-        #//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[0]/number-card/div/p[2]/a
-        #//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[1]/number-card/div/p[2]/a
-        #//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[2]/number-card/div/p[2]/a
-        ndriver=uc.Chrome(use_subprocess=True)
-        for line in range(int(self.vaildnumbers)):
-            pdriver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{line + 1}]/number-card/div/p[2]/a').click()
-            ndriver.get("https://www.behindthename.com/random/random.php?gender=both&number=1&sets=1&surname=&randomsurname=yes&norare=yes&nodiminutives=yes&all=yes")
-            time.sleep(3)
-            driver.find_element(By.XPATH,'//*[@id="__cmp_body"]/div/div/div[2]/a[2]/span').click()
-            while True:
-                try:
-                    self.name=ndriver.find_element(By.XPATH,'/html/body/div[2]/div/div/center/div[1]').text
-                    break
-                except:
-                    pass
-            self.name=str(self.name.split())
-            def twphone(self):
-                while True:
-                    try:
-                        self.current_phone=pdriver.find_element(By.XPATH,'/html/body/app-root/div/div[1]/main/messages/section/div/div/div/h1').text
-                        break
-                    except:
-                        pass
-            twphone(TwitterBot)
-            while True:
-                try:
-                    [driver.find_element(By.XPATH,'/html/body/div/div/div/div[1]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[2]/div[1]/label/div/div[2]/div/input').send_keys(part) for part in self.name]
-                    break
-                except Exception as e:
-                    print(e)
 class TiktokBot:
         def __init__(self):
             global recvtext
@@ -89,7 +43,6 @@ class TiktokBot:
                         break
                     except:
                         pass
-            #Checking if the webpage is loaded
             checking_phone(TiktokBot)
             self.phone=self.phone[:len(self.phone)-1]
             driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[1]/number-card/div/p[2]/a').click()
@@ -257,7 +210,67 @@ if "ti" in social_in:
             pass
     driver.find_element(By.XPATH,'/html/body/tiktok-cookie-banner//div/div[2]/button[2]').click()
 if "tw" in social_in:
-    bot=TwitterBot()
-    bot.Fr()
+    pdriver= uc.Chrome(use_subprocess=True)
+    ndriver= uc.Chrome(use_subprocess=True)
+    orig_url="https://quackr.io/temporary-numbers/united-kingdom"
+    ndriver.get("https://quackr.io/temporary-numbers/united-kingdom")
+    vaildnumbers=ndriver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/h4[1]').text
+    vaildnumbers=vaildnumbers.split()
+    vaildnumbers=vaildnumbers[0]
+    vaildnumbers=int(vaildnumbers)
+    while True:
+        try:
+            phone=ndriver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[1]/number-card/div/p[2]/a').text
+            break
+        except:
+            pass
+    for line in range(int(vaildnumbers)):
+        ndriver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{line + 1}]/number-card/div/p[2]/a').click()
+        pdriver=uc.Chrome(use_subprocess=True)
+        pdriver.get("https://www.behindthename.com/random/random.php?gender=both&number=1&sets=1&surname=&randomsurname=yes&norare=yes&nodiminutives=yes&all=yes")
+        time.sleep(3)
+        pdriver.find_element(By.XPATH,'//*[@id="__cmp_body"]/div/div/div[2]/a[2]/span').click()
+        while True:
+            try:
+                name=pdriver.find_element(By.XPATH,'/html/body/div[2]/div/div/center/div[1]').text
+                break
+            except:
+                pass
+        pdriver.close()
+        name=str(name.split())
+        def twphone():
+            global current_phone
+            while True:
+                try:
+                    current_phone=ndriver.find_element(By.XPATH,'/html/body/app-root/div/div[1]/main/messages/section/div/div/div/h1').text
+                    break
+                except:
+                    pass
+        twphone()
+        while True:
+            try:
+                driver.get("https://twitter.com/")
+                break
+            except:
+                pass
+        while True:
+            try:
+                driver.find_element(By.XPATH,'//*[@id="layers"]/div/div/div/div/div/div[2]/div[1]').click()
+                break
+            except:
+                pass
+        #//*[@id="react-root"]/div/div/div[2]/main/div/div/div/div[2]/div[2]/div/div[5]/div
+        time.sleep(5)
+        driver.find_element(By.XPATH,'//*[@id="react-root"]/div/div/div[2]/main/div/div/div[1]/div[1]/div/div[3]/a').click()
+        time.sleep(2)
+        list
+        while True:
+            try:
+                [driver.find_element(By.XPATH,'/html/body/div/div/div/div[1]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[2]/div[1]/label/div/div[2]/div/input').send_keys(part) for part in name]
+                break
+            except Exception as e:
+                print(e)
+        driver.find_element(By.XPATH,'//*[@id="layers"]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[2]/div[2]/label/div/div[2]/div/input').send_keys(current_phone)
+        driver.find_element(By.XPATH,'//*[@id="SELECTOR_1"]').click()
     
 input()
