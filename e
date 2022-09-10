@@ -219,6 +219,7 @@ if "tw" in social_in:
     vaildnumbers=vaildnumbers[0]
     vaildnumbers=int(vaildnumbers)
     while True:
+        #//*[@id="layers"]/div/div/div/div/div/div[2]/div[1]/div
         try:
             phone=ndriver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[1]/number-card/div/p[2]/a').text
             break
@@ -253,24 +254,29 @@ if "tw" in social_in:
                 break
             except:
                 pass
+        time.sleep(20)
         while True:
             try:
                 driver.find_element(By.XPATH,'//*[@id="layers"]/div/div/div/div/div/div[2]/div[1]').click()
                 break
             except:
                 pass
-        #//*[@id="react-root"]/div/div/div[2]/main/div/div/div/div[2]/div[2]/div/div[5]/div
+        #//*[@id="layers"]/div/div/div/div/div/div[2]/div[1]
+        #/html/body/div/div/div/div[1]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[2]/div[1]/label/div/div[2]/div/input
         time.sleep(5)
         driver.find_element(By.XPATH,'//*[@id="react-root"]/div/div/div[2]/main/div/div/div[1]/div[1]/div/div[3]/a').click()
         time.sleep(2)
-        list
+        name=list(name)
         while True:
             try:
-                [driver.find_element(By.XPATH,'/html/body/div/div/div/div[1]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[2]/div[1]/label/div/div[2]/div/input').send_keys(part) for part in name]
+                for part in name:
+                    driver.find_element(By.XPATH,'/html/body/div/div/div/div[1]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[2]/div[1]/label/div/div[2]/div/input').send_keys(part.replace("[","").replace("]","").replace("'","").replace(","," "))
                 break
             except Exception as e:
                 print(e)
         driver.find_element(By.XPATH,'//*[@id="layers"]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[2]/div[2]/label/div/div[2]/div/input').send_keys(current_phone)
         driver.find_element(By.XPATH,'//*[@id="SELECTOR_1"]').click()
+        driver.find_element(By.XPATH,'//*[@id="SELECTOR_7"]/option[4]').click()
+        driver.find_element(By.XPATH,'//*[@id="SELECTOR_8"]').click()
     
 input()
