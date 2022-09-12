@@ -100,6 +100,7 @@ class TiktokBot:
                             if capt:
                                 driver.get("https://quackr.io/temporary-numbers/united-kingdom/")
                                 time.sleep(7)
+                                "/html/body/div/div/div/div[1]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[2]/div[1]/label/div/div[2]/div/input"
                                 print(f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+2}]/number-card/div/p[2]')
                                 self.phone=driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+2}]/number-card/div/p[2]').text
                                 current_num=f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+2}]/number-card/div/p[2]'
@@ -213,11 +214,20 @@ if "tw" in social_in:
     pdriver= uc.Chrome(use_subprocess=True)
     ndriver= uc.Chrome(use_subprocess=True)
     orig_url="https://quackr.io/temporary-numbers/united-kingdom"
-    ndriver.get("https://temp-mail.org/en/")
-    resp_inp=input()
-    for line in range(int(resp_inp)):
-        ndriver.get("https://temp-mail.org/en/")
-        ndriver.find_element(By.XPATH,'//*[@id="tm-body"]/div[1]/div/div/div[2]/div[1]/form/div[1]/div/button[2]').click()
+    ndriver.get("https://quackr.io/temporary-numbers/united-kingdom")
+    vaildnumbers=ndriver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/h4[1]').text
+    vaildnumbers=vaildnumbers.split()
+    vaildnumbers=vaildnumbers[0]
+    vaildnumbers=int(vaildnumbers)
+    while True:
+        #//*[@id="layers"]/div/div/div/div/div/div[2]/div[1]/div
+        try:
+            phone=ndriver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[1]/number-card/div/p[2]/a').text
+            break
+        except:
+            pass
+    for line in range(int(vaildnumbers)):
+        ndriver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{line + 1}]/number-card/div/p[2]/a').click()
         pdriver=uc.Chrome(use_subprocess=True)
         pdriver.get("https://www.behindthename.com/random/random.php?gender=both&number=1&sets=1&surname=&randomsurname=yes&norare=yes&nodiminutives=yes&all=yes")
         time.sleep(3)
@@ -230,6 +240,15 @@ if "tw" in social_in:
                 pass
         pdriver.close()
         name=str(name.split())
+        def twphone():
+            global current_phone
+            while True:
+                try:
+                    current_phone=ndriver.find_element(By.XPATH,'/html/body/app-root/div/div[1]/main/messages/section/div/div/div/h1').text
+                    break
+                except:
+                    pass
+        twphone()
         while True:
             try:
                 driver.get("https://twitter.com/")
@@ -256,24 +275,9 @@ if "tw" in social_in:
                 break
             except Exception as e:
                 print(e)
-        driver.find_element(By.XPATH,'//*[@id="react-root"]/div/div/div[2]/main/div/div/div/div[2]/div[2]/div[1]/div/div/div[2]/div[3]/span').click()
-        driver.find_element(By.XPATH,'//*[@id="layers"]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[2]/div[2]/label/div/div[2]/div/input').send_keys(Keys.CONTROL,"v")
+        driver.find_element(By.XPATH,'//*[@id="layers"]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[2]/div[2]/label/div/div[2]/div/input').send_keys(current_phone)
         driver.find_element(By.XPATH,'//*[@id="SELECTOR_1"]').click()
-        driver.find_element(By.XPATH,'//*[@id="SELECTOR_1"]').send_keys("j")
-        driver.find_element(By.XPATH,'//*[@id="SELECTOR_1"]').send_keys(Keys.ENTER)
-        driver.find_element(By.XPATH,'//*[@id="SELECTOR_2"]').click()
-        driver.find_element(By.XPATH,'//*[@id="SELECTOR_2"]').send_keys("4")
-        driver.find_element(By.XPATH,'//*[@id="SELECTOR_2"]').send_keys(Keys.ENTER)
-        driver.find_element(By.XPATH,'//*[@id="SELECTOR_3"]').click()
-        driver.find_element(By.XPATH,'//*[@id="SELECTOR_3"]').send_keys("2000")
-        driver.find_element(By.XPATH,'//*[@id="SELECTOR_3"]').send_keys(Keys.ENTER)
-        time.sleep(4)
-        driver.find_element(By.XPATH,'//*[@id="layers"]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div/div/div').click()
-        time.sleep(5)
-        driver.find_element(By.XPATH,'//*[@id="layers"]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div/div').click()
-        time.sleep(3)
-        driver.find_element(By.XPATH,'//*[@id="layers"]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[2]/div/div')
-        time.sleep(2)
-        driver.find_element(By.XPATH,'//*[@id="layers"]/div[3]/div/div/div/div/div/div[2]/div[2]/div[2]/div[1]').click()
-            
+        driver.find_element(By.XPATH,'//*[@id="SELECTOR_7"]/option[4]').click()
+        driver.find_element(By.XPATH,'//*[@id="SELECTOR_8"]').click()
+    
 input()
