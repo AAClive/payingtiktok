@@ -294,3 +294,4 @@ if "tw" in social_in:
         driver.find_element(By.XPATH,'//*[@id="SELECTOR_8"]').click()
     
 input()
+
