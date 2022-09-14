@@ -161,6 +161,19 @@ class TiktokBot:
                                         break
                                     else:
                                         if self.stopwatch==False:
+                                            def trying_singup():
+                                                driver.switch_to.window(driver.window_handles[1])
+                                                driver.get('https://www.tiktok.com/login/phone-or-email')
+                                                time.sleep(4)
+                                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div/div/a[2]').click()
+                                                temp_in=driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input')
+                                                temp_in.clear()
+                                                time.sleep(2)
+                                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input').send_keys(self.phone[3:].replace(" ",""))
+                                                time.sleep(2)
+                                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
+                                                time.sleep(3)
+                                            trying_singup()
                                             driver.switch_to.window(driver.window_handles[0])
                                             driver.get("https://quackr.io/")
                                             while True:
@@ -179,7 +192,7 @@ class TiktokBot:
                                                 driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]/div[2]/div[1]/input').send_keys(contry)
                                                 driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]/div[2]/div[1]/input').send_keys(Keys.RETURN)
                                     
-                            asyncio.ensure_future(countdown())
+                            asyncio.ensure_future(countdown(30))
                             asyncio.ensure_future(finding_verification())
                 return go_through_the_vaildnumbers()
 social_in=input("[SOCIAL] ")
