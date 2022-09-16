@@ -23,178 +23,178 @@ class TiktokBot:
             if timer=="00:01":
                 self.stopwatch=False
                 break
-        def __init__(self):
-            global recvtext
-            global capt
-        def Fr(self):
-            driver = uc.Chrome(use_subprocess=True)
-            orig_url="https://quackr.io/temporary-numbers/united-kingdom"
-            driver.get("https://quackr.io/temporary-numbers/united-kingdom")
-            #set to "self"
-            self.vaildnumbers=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/h4[1]').text
-            self.vaildnumbers=self.vaildnumbers.split()
-            self.vaildnumbers=self.vaildnumbers[0]
-            self.vaildnumbers=int(self.vaildnumbers)
-        def phone(self):
-            def checking_phone(self):
-                while True:
-                    try:
-                        self.phone=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[1]/number-card/div/p[2]/a').text
-                        break
-                    except:
-                        pass
-            checking_phone(TiktokBot)
-            self.phone=self.phone[:len(self.phone)-1]
-            driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[1]/number-card/div/p[2]/a').click()
-            driver.execute_script("window.open('');")
-            driver.switch_to.window(driver.window_handles[1])
-            driver.get("https://www.tiktok.com/signup/phone-or-email/phone")
-        def tiktok(self):
-                while True:
-                    try:
-                        driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div[1]').click()
-                        break
-                    except:
-                        pass
+    def __init__(self):
+        global recvtext
+        global capt
+    def Fr(self):
+        driver = uc.Chrome(use_subprocess=True)
+        orig_url="https://quackr.io/temporary-numbers/united-kingdom"
+        driver.get("https://quackr.io/temporary-numbers/united-kingdom")
+        #set to "self"
+        self.vaildnumbers=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/h4[1]').text
+        self.vaildnumbers=self.vaildnumbers.split()
+        self.vaildnumbers=self.vaildnumbers[0]
+        self.vaildnumbers=int(self.vaildnumbers)
+    def phone(self):
+        def checking_phone(self):
+            while True:
+                try:
+                    self.phone=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[1]/number-card/div/p[2]/a').text
+                    break
+                except:
+                    pass
+        checking_phone(TiktokBot)
+        self.phone=self.phone[:len(self.phone)-1]
+        driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[1]/number-card/div/p[2]/a').click()
+        driver.execute_script("window.open('');")
+        driver.switch_to.window(driver.window_handles[1])
+        driver.get("https://www.tiktok.com/signup/phone-or-email/phone")
+    def tiktok(self):
+            while True:
+                try:
+                    driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div[1]').click()
+                    break
+                except:
+                    pass
 
-                def Birthdate():
-                    driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div[1]/div[2]/div[3]').click()
-                    driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div[2]/div[1]').click()
-                    driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div[2]/div[2]/div[7]').click()
-                    driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div[3]/div[1]').click()
-                    driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div[3]/div[2]/div[23]').click()
-                    driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]').click()
-                Birthdate()
+            def Birthdate():
+                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div[1]/div[2]/div[3]').click()
+                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div[2]/div[1]').click()
+                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div[2]/div[2]/div[7]').click()
+                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div[3]/div[1]').click()
+                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div[3]/div[2]/div[23]').click()
+                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]').click()
+            Birthdate()
 
-                def phone_number():
-                    driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]/div[2]/div[1]/input').send_keys("united kin")
-                    driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]/div[2]/div[1]/input').send_keys(Keys.RETURN)
-                    driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input').send_keys(self.phone[3:])
-                    time.sleep(1)
-                    def verication_code():
-                        driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
-                        driver.switch_to.window(driver.window_handles[0])
-                        #Waiting for the verification code
-                        time.sleep(30)
-                    return verication_code()
-                phone_number()
+            def phone_number():
+                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]/div[2]/div[1]/input').send_keys("united kin")
+                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]/div[2]/div[1]/input').send_keys(Keys.RETURN)
+                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input').send_keys(self.phone[3:])
+                time.sleep(1)
+                def verication_code():
+                    driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
+                    driver.switch_to.window(driver.window_handles[0])
+                    #Waiting for the verification code
+                    time.sleep(30)
+                return verication_code()
+            phone_number()
 
-                def find_verification(self):
-                    self.recvtext=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/messages/section/div/div/div/table/tbody/tr[1]/td[3]').text
-                    self.recvtext #the verication code
-                    global phonefailed
-                    if self.recvtext.startswith("[Tik"):
-                        print(self.recvtext[9:15])
-                        driver.switch_to.window(driver.window_handles[1])
-                        self.phonefailed=False
-                    else:
-                        self.phonefailed=True
-                find_verification(TiktokBot)
+            def find_verification(self):
+                self.recvtext=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/messages/section/div/div/div/table/tbody/tr[1]/td[3]').text
+                self.recvtext #the verication code
+                global phonefailed
+                if self.recvtext.startswith("[Tik"):
+                    print(self.recvtext[9:15])
+                    driver.switch_to.window(driver.window_handles[1])
+                    self.phonefailed=False
+                else:
+                    self.phonefailed=True
+            find_verification(TiktokBot)
 
-                def go_through_the_vaildnumbers():
+            def go_through_the_vaildnumbers():
 
-                    if self.phonefailed:
-                        async def finding_verification():
-                            while True:
-                                recvtext=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/messages/section/div/div/div/table/tbody/tr[1]/td[3]').text
-                                driver.refresh()
-                                if recvtext.startswith("[Tik"):
-                                    print(recvtext[9:15])
-                                    driver.switch_to.window(driver.window_handles[1])
-                                    self.phonefailed=False
-                                    break
-                                else:
-                                    if self.stopwatch==False:
-                                        def trying_singup():
-                                            driver.switch_to.window(driver.window_handles[1])
-                                            driver.get('https://www.tiktok.com/login/phone-or-email')
-                                            time.sleep(4)
-                                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div/div/a[2]').click()
-                                            temp_in=driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input')
-                                            temp_in.clear()
-                                            time.sleep(2)
-                                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input').send_keys(self.phone[3:].replace(" ",""))
-                                            time.sleep(2)
-                                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
-                                            time.sleep(3)
-                                        trying_singup()
-                                        driver.switch_to.window(driver.window_handles[0])
-                                        driver.get("https://quackr.io/")
-                                        while True:
-                                            try:
-                                                self.vaildnumbers=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/home-page/section/div/div/div/nav/div[1]/div/p[2]').text
-                                                break
-                                            except:
-                                                pass
-                                        for number in self.vaildnumbers:
-                                            self.phone=driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/home-page/section/div/div/div/div/div[{number+1}]/number-card/div/p[2]/a').text
-                                            contry=driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/home-page/section/div/div/div/div/div[{number+1}]/number-card/div/p[1]/span').text
-                                            driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/home-page/section/div/div/div/div/div[{number+1}]/number-card/div/p[2]/a').click()
-                                            driver.switch_to.window(driver.window_handles[1])
-                                            time.sleep(1)
-                                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]').click()
-                                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]/div[2]/div[1]/input').send_keys(contry)
-                                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]/div[2]/div[1]/input').send_keys(Keys.RETURN)
-                        asyncio.ensure_future(countdown(30))
-                        asyncio.ensure_future(finding_verification())
-                        for number in range(self.vaildnumbers):
-                            global capt
-                            if capt:
-                                driver.get("https://quackr.io/temporary-numbers/united-kingdom/")
-                                time.sleep(7)
-                                "/html/body/div/div/div/div[1]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[2]/div[1]/label/div/div[2]/div/input"
-                                print(f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+2}]/number-card/div/p[2]')
-                                self.phone=driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+2}]/number-card/div/p[2]').text
-                                current_num=f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+2}]/number-card/div/p[2]'
-                                driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+2}]/number-card/div/p[2]/a').click()
+                if self.phonefailed:
+                    async def finding_verification():
+                        while True:
+                            recvtext=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/messages/section/div/div/div/table/tbody/tr[1]/td[3]').text
+                            driver.refresh()
+                            if recvtext.startswith("[Tik"):
+                                print(recvtext[9:15])
                                 driver.switch_to.window(driver.window_handles[1])
-                                temp_in=driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input')
-                                temp_in.clear()
-                                time.sleep(2)
-                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input').send_keys(self.phone[3:].replace(" ",""))
-                                time.sleep(2)
-                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
-                                time.sleep(3)
+                                self.phonefailed=False
+                                break
                             else:
-                                driver.get("https://quackr.io/temporary-numbers/united-kingdom/")
-                                time.sleep(7)
-                                print(f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]')
-                                self.phone=driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]').text
-                                current_num=f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]'
-                                driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]/a').click()
-                                driver.switch_to.window(driver.window_handles[1])
-                                temp_in=driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input')
-                                temp_in.clear()
-                                time.sleep(2)
-                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input').send_keys(self.phone[3:].replace(" ",""))
-                                time.sleep(2)
-                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
-                                time.sleep(3)
-                            try:
-                                driver.find_element(By.XPATH,'//*[@id="captcha_container"]/div/div[2]')
-                                capt=True
-                                driver.switch_to.window(driver.window_handles[0])
-                                time.sleep(1)
-                                self.phone=driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]').text
-                                current_num=f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]'
-                                driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]/a').click()
-                                driver.switch_to.window(driver.window_handles[1])
-                                temp_in=driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input')
-                                temp_in.clear()
-                                time.sleep(2)
-                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input').send_keys(self.phone[3:].replace(" ",""))
-                                time.sleep(2)
-                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
-                                time.sleep(3)
-                            except:
-                                pass
+                                if self.stopwatch==False:
+                                    def trying_singup():
+                                        driver.switch_to.window(driver.window_handles[1])
+                                        driver.get('https://www.tiktok.com/login/phone-or-email')
+                                        time.sleep(4)
+                                        driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div/div/a[2]').click()
+                                        temp_in=driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input')
+                                        temp_in.clear()
+                                        time.sleep(2)
+                                        driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input').send_keys(self.phone[3:].replace(" ",""))
+                                        time.sleep(2)
+                                        driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
+                                        time.sleep(3)
+                                    trying_singup()
+                                    driver.switch_to.window(driver.window_handles[0])
+                                    driver.get("https://quackr.io/")
+                                    while True:
+                                        try:
+                                            self.vaildnumbers=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/home-page/section/div/div/div/nav/div[1]/div/p[2]').text
+                                            break
+                                        except:
+                                            pass
+                                    for number in self.vaildnumbers:
+                                        self.phone=driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/home-page/section/div/div/div/div/div[{number+1}]/number-card/div/p[2]/a').text
+                                        contry=driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/home-page/section/div/div/div/div/div[{number+1}]/number-card/div/p[1]/span').text
+                                        driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/home-page/section/div/div/div/div/div[{number+1}]/number-card/div/p[2]/a').click()
+                                        driver.switch_to.window(driver.window_handles[1])
+                                        time.sleep(1)
+                                        driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]').click()
+                                        driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]/div[2]/div[1]/input').send_keys(contry)
+                                        driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]/div[2]/div[1]/input').send_keys(Keys.RETURN)
+                    asyncio.ensure_future(countdown(30))
+                    asyncio.ensure_future(finding_verification())
+                    for number in range(self.vaildnumbers):
+                        global capt
+                        if capt:
+                            driver.get("https://quackr.io/temporary-numbers/united-kingdom/")
+                            time.sleep(7)
+                            "/html/body/div/div/div/div[1]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[2]/div[1]/label/div/div[2]/div/input"
+                            print(f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+2}]/number-card/div/p[2]')
+                            self.phone=driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+2}]/number-card/div/p[2]').text
+                            current_num=f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+2}]/number-card/div/p[2]'
+                            driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+2}]/number-card/div/p[2]/a').click()
+                            driver.switch_to.window(driver.window_handles[1])
+                            temp_in=driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input')
+                            temp_in.clear()
+                            time.sleep(2)
+                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input').send_keys(self.phone[3:].replace(" ",""))
+                            time.sleep(2)
+                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
+                            time.sleep(3)
+                        else:
+                            driver.get("https://quackr.io/temporary-numbers/united-kingdom/")
+                            time.sleep(7)
+                            print(f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]')
+                            self.phone=driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]').text
+                            current_num=f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]'
+                            driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]/a').click()
+                            driver.switch_to.window(driver.window_handles[1])
+                            temp_in=driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input')
+                            temp_in.clear()
+                            time.sleep(2)
+                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input').send_keys(self.phone[3:].replace(" ",""))
+                            time.sleep(2)
+                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
+                            time.sleep(3)
+                        try:
+                            driver.find_element(By.XPATH,'//*[@id="captcha_container"]/div/div[2]')
+                            capt=True
                             driver.switch_to.window(driver.window_handles[0])
-                            # for _ in range(50):
-                                # time.sleep(2)
-                                # driver.refresh()
-                
-                                    
-                return go_through_the_vaildnumbers()
+                            time.sleep(1)
+                            self.phone=driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]').text
+                            current_num=f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]'
+                            driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]/a').click()
+                            driver.switch_to.window(driver.window_handles[1])
+                            temp_in=driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input')
+                            temp_in.clear()
+                            time.sleep(2)
+                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input').send_keys(self.phone[3:].replace(" ",""))
+                            time.sleep(2)
+                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
+                            time.sleep(3)
+                        except:
+                            pass
+                        driver.switch_to.window(driver.window_handles[0])
+                        # for _ in range(50):
+                            # time.sleep(2)
+                            # driver.refresh()
+            
+                                
+            return go_through_the_vaildnumbers()
 social_in=input("[SOCIAL] ")
 print(social_in.lower())
 if "ti" in social_in:
@@ -294,5 +294,3 @@ if "tw" in social_in:
         driver.find_element(By.XPATH,'//*[@id="SELECTOR_8"]').click()
     
 input()
-
-
