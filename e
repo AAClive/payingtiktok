@@ -10,19 +10,19 @@ global vaildnumbers
 capt=False
 import time
 import asyncio
-async def countdown(t):
-    while t:
-        mins, secs = divmod(t, 60)
-        timer = '{:02d}:{:02d}'.format(mins, secs)
-        print(timer, end="\r")
-        timer
-        await asyncio.sleep(1)
-        t -= 1
-        if timer=="00:01":
-            stopwatch=False
-            break
 
 class TiktokBot:
+    async def countdown(t,self):
+        while t:
+            mins, secs = divmod(t, 60)
+            timer = '{:02d}:{:02d}'.format(mins, secs)
+            print(timer, end="\r")
+            timer
+            await asyncio.sleep(1)
+            t -= 1
+            if timer=="00:01":
+                self.stopwatch=False
+                break
         def __init__(self):
             global recvtext
             global capt
@@ -94,7 +94,49 @@ class TiktokBot:
                 def go_through_the_vaildnumbers():
 
                     if self.phonefailed:
-
+                        async def finding_verification():
+                            while True:
+                                recvtext=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/messages/section/div/div/div/table/tbody/tr[1]/td[3]').text
+                                driver.refresh()
+                                if recvtext.startswith("[Tik"):
+                                    print(recvtext[9:15])
+                                    driver.switch_to.window(driver.window_handles[1])
+                                    self.phonefailed=False
+                                    break
+                                else:
+                                    if self.stopwatch==False:
+                                        def trying_singup():
+                                            driver.switch_to.window(driver.window_handles[1])
+                                            driver.get('https://www.tiktok.com/login/phone-or-email')
+                                            time.sleep(4)
+                                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div/div/a[2]').click()
+                                            temp_in=driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input')
+                                            temp_in.clear()
+                                            time.sleep(2)
+                                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input').send_keys(self.phone[3:].replace(" ",""))
+                                            time.sleep(2)
+                                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
+                                            time.sleep(3)
+                                        trying_singup()
+                                        driver.switch_to.window(driver.window_handles[0])
+                                        driver.get("https://quackr.io/")
+                                        while True:
+                                            try:
+                                                self.vaildnumbers=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/home-page/section/div/div/div/nav/div[1]/div/p[2]').text
+                                                break
+                                            except:
+                                                pass
+                                        for number in self.vaildnumbers:
+                                            self.phone=driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/home-page/section/div/div/div/div/div[{number+1}]/number-card/div/p[2]/a').text
+                                            contry=driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/home-page/section/div/div/div/div/div[{number+1}]/number-card/div/p[1]/span').text
+                                            driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/home-page/section/div/div/div/div/div[{number+1}]/number-card/div/p[2]/a').click()
+                                            driver.switch_to.window(driver.window_handles[1])
+                                            time.sleep(1)
+                                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]').click()
+                                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]/div[2]/div[1]/input').send_keys(contry)
+                                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]/div[2]/div[1]/input').send_keys(Keys.RETURN)
+                        asyncio.ensure_future(countdown(30))
+                        asyncio.ensure_future(finding_verification())
                         for number in range(self.vaildnumbers):
                             global capt
                             if capt:
@@ -150,50 +192,8 @@ class TiktokBot:
                             # for _ in range(50):
                                 # time.sleep(2)
                                 # driver.refresh()
-                            async def finding_verification():
-                                while True:
-                                    recvtext=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/messages/section/div/div/div/table/tbody/tr[1]/td[3]').text
-                                    driver.refresh()
-                                    if recvtext.startswith("[Tik"):
-                                        print(recvtext[9:15])
-                                        driver.switch_to.window(driver.window_handles[1])
-                                        self.phonefailed=False
-                                        break
-                                    else:
-                                        if self.stopwatch==False:
-                                            def trying_singup():
-                                                driver.switch_to.window(driver.window_handles[1])
-                                                driver.get('https://www.tiktok.com/login/phone-or-email')
-                                                time.sleep(4)
-                                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div/div/a[2]').click()
-                                                temp_in=driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input')
-                                                temp_in.clear()
-                                                time.sleep(2)
-                                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input').send_keys(self.phone[3:].replace(" ",""))
-                                                time.sleep(2)
-                                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
-                                                time.sleep(3)
-                                            trying_singup()
-                                            driver.switch_to.window(driver.window_handles[0])
-                                            driver.get("https://quackr.io/")
-                                            while True:
-                                                try:
-                                                    self.vaildnumbers=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/home-page/section/div/div/div/nav/div[1]/div/p[2]').text
-                                                    break
-                                                except:
-                                                    pass
-                                            for number in self.vaildnumbers:
-                                                self.phone=driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/home-page/section/div/div/div/div/div[{number+1}]/number-card/div/p[2]/a').text
-                                                contry=driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/home-page/section/div/div/div/div/div[{number+1}]/number-card/div/p[1]/span').text
-                                                driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/home-page/section/div/div/div/div/div[{number+1}]/number-card/div/p[2]/a').click()
-                                                driver.switch_to.window(driver.window_handles[1])
-                                                time.sleep(1)
-                                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]').click()
-                                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]/div[2]/div[1]/input').send_keys(contry)
-                                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[1]/div[2]/div[1]/input').send_keys(Keys.RETURN)
+                
                                     
-                            asyncio.ensure_future(countdown(30))
-                            asyncio.ensure_future(finding_verification())
                 return go_through_the_vaildnumbers()
 social_in=input("[SOCIAL] ")
 print(social_in.lower())
@@ -294,4 +294,5 @@ if "tw" in social_in:
         driver.find_element(By.XPATH,'//*[@id="SELECTOR_8"]').click()
     
 input()
+
 
