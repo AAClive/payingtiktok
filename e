@@ -10,7 +10,19 @@ global vaildnumbers
 capt=False
 import time
 import asyncio
-
+class InstagramBot:
+    def __init__():
+        driver.get("https://tempail.com/en/")
+        time.sleep(3)
+        driver.find_element(By.XPATH,'/html/body/section[1]/div[2]/div/div[4]/a[1]')
+        idriver=uc.Chrome(use_subprocess=True)
+        idriver.get("https://www.instagram.com/accounts/emailsignup/")
+        while True:
+            try:
+                idriver.find_element(By.XPATH,'//*[@id="react-root"]/div/div/section/main/div/div/div[1]/div[2]/form/div[3]/div/label/input').send_keys(Keys.CONTROL,"v")
+                break
+            except:
+                pass
 class TiktokBot:
     async def countdown(t,self):
         while t:
@@ -44,7 +56,6 @@ class TiktokBot:
                 except:
                     pass
         checking_phone(TiktokBot)
-        self.phone=self.phone[:len(self.phone)-1]
         driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[1]/number-card/div/p[2]/a').click()
         driver.execute_script("window.open('');")
         driver.switch_to.window(driver.window_handles[1])
@@ -81,31 +92,55 @@ class TiktokBot:
 
             def go_through_the_vaildnumbers():
                     for number in range(self.vaildnumbers):
-                        asyncio.ensure_future(self.countdown(30))
-                        print("DONEEEEEEEEEEEEEEEEEEEEEEEEEEEQ")
+                        asyncio.ensure_future(self.countdown(10))
+                 
                         recvtext=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/messages/section/div/div/div/table/tbody/tr[1]/td[3]').text
                         driver.refresh()
-                        if recvtext.startswith("[Tik"):
+                        print(recvtext)
+                        recvtext=str(recvtext)
+                        recvtext.startswith("[")
+                        if recvtext.startswith("["):
                             print(recvtext[9:15])
                             driver.switch_to.window(driver.window_handles[1])
-                            print("eeeeeeeqqqq")
                             self.phonefailed=False
+                            recvtext=recvtext.split()
+                            recvtext=recvtext[1]
+                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/div/input').send_keys(recvtext)
+                            driver.find_element(By.XPATH,'/html/body/tiktok-cookie-banner//div/div[2]/button[2]').click()
+                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/button').click()
+                            for line in range(10):
+                                #clicking on the profile
+                                driver.find_element(By.XPATH,f'//*[@id="app"]/div[2]/div[2]/div[1]/div[{line}]/a')
+                                follower_count=driver.find_element(By.XPATH,'//*[@id="app"]/div[2]/div[2]/div/div[1]/h2[1]/div[2]/strong').text
+                                if "K" or "M" in follower_count:
+                                    #if the follower count is in the thousands or the millions
+                                    driver.find_element(By.XPATH,'//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[1]/div/div/a').click()
+                                    #clicks into the first video
+                            #going to profile and uploading
+                            driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[4]').click()
+                            time.sleep(1)
+                            driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[4]/div/ul/li[1]/a').click()
+                            driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[1]/a').click()
+
                         else:
 
                             driver.switch_to.window(driver.window_handles[1])
                             driver.get('https://www.tiktok.com/login/phone-or-email')
                             time.sleep(4)
-                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div/div/a[2]').click()
-                            temp_in=driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input')
+                            temp_in=driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div/div[2]/input')
                             temp_in.clear()
+                            temp_in.send_keys(self.phone[3:])
                             time.sleep(2)
-                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input').send_keys(self.phone[3:].replace(" ",""))
+                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div/div[1]/div').click()
+                            time.sleep(1)
+                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div/div[1]/div[2]/div[1]/input').send_keys("united kin")
+                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div/div[1]/div[2]/div[1]/input').send_keys(Keys.RETURN)
                             time.sleep(2)
                             driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[4]/div/button').click()
                             time.sleep(1)
                             driver.switch_to.window(driver.window_handles[0])
                             time.sleep(4)
-                            recvtext=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/messages/section/div/div/div/table/tbody/tr[1]/td[3]/text()').text
+                            recvtext=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/messages/section/div/div/div/table/tbody/tr[1]/td[3]').text
                             time.sleep(1)
                             recvtext=recvtext.split()
                             recvtext=recvtext[1]
@@ -114,8 +149,6 @@ class TiktokBot:
                             time.sleep(1)
                             driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
                             time.sleep(3)
-
-                            driver.switch_to.window(driver.window_handles[0])
                             driver.get("https://quackr.io/")
                             while True:
                                 try:
@@ -123,6 +156,7 @@ class TiktokBot:
                                     break
                                 except:
                                     pass
+                        driver.switch_to.window(driver.window_handles[0])
                         driver.get("https://quackr.io/temporary-numbers/united-kingdom/")
                         time.sleep(7)
                         print(f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]')
@@ -243,12 +277,3 @@ if "tw" in social_in:
         driver.find_element(By.XPATH,'//*[@id="SELECTOR_8"]').click()
     
 input()
-
-
-Hello,
-I am an expert python developer,
-And have great experience in the field of development and web scraping.
-I have been programming for 3yrs, and feel as though I would be the perfect fit the job.
-I hope you consider,
-Thank you
-
