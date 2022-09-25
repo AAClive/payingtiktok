@@ -2,6 +2,7 @@ import time
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import undetected_chromedriver.v2 as uc
+import pyautogui as p
 driver = uc.Chrome(use_subprocess=True)
 orig_url="https://quackr.io/temporary-numbers/united-kingdom"
 driver.get("https://quackr.io/temporary-numbers/united-kingdom")
@@ -11,18 +12,45 @@ capt=False
 import time
 import asyncio
 class InstagramBot:
-    def __init__():
+    def __init__(self):
         driver.get("https://tempail.com/en/")
         time.sleep(3)
-        driver.find_element(By.XPATH,'/html/body/section[1]/div[2]/div/div[4]/a[1]')
+        driver.find_element(By.XPATH,'/html/body/div[5]/div[2]/div[1]/div[2]/div[2]/button[1]').click()
+        driver.find_element(By.XPATH,'/html/body/section[1]/div[2]/div/div[4]/a[1]/i').click()
         idriver=uc.Chrome(use_subprocess=True)
         idriver.get("https://www.instagram.com/accounts/emailsignup/")
+        time.sleep(3)
+        idriver.find_element(By.XPATH,'/html/body/div[4]/div/div/button[2]').click()
+        time.sleep(1)
+        idriver.find_element(By.XPATH,'//*[@id="react-root"]/section/main/div/div/div[1]/div[2]/form/div[3]/div/label/input').send_keys(Keys.CONTROL,"v")
+        ndriver=uc.Chrome(use_subprocess=True)
+        ndriver.get("https://www.namegenerator.co/real-names/english-name-generator")
         while True:
             try:
-                idriver.find_element(By.XPATH,'//*[@id="react-root"]/div/div/section/main/div/div/div[1]/div[2]/form/div[3]/div/label/input').send_keys(Keys.CONTROL,"v")
+                ndriver.find_element(By.XPATH,'//*[@id="main_btn_getNames"]').click()
                 break
             except:
                 pass
+        self.name=ndriver.find_element(By.XPATH,'//*[@id="mainForm"]/div[5]/div/div/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[1]/span').text
+        idriver.find_element(By.XPATH,'//*[@id="react-root"]/section/main/div/div/div[1]/div[2]/form/div[4]/div/label/input').send_keys(self.name)
+        self.name=self.name.split()
+        ndriver.close()
+        idriver.find_element(By.XPATH,'//*[@id="react-root"]/section/main/div/div/div[1]/div[2]/form/div[5]/div/label/input').send_keys(self.name[1]+self.name[0]+"233re321")
+        idriver.find_element(By.XPATH,'//*[@id="react-root"]/section/main/div/div/div[1]/div[2]/form/div[6]/div/label/input').send_keys("4AD6%TfT5,W16-Uj")
+        idriver.find_element(By.XPATH,'//*[@id="react-root"]/section/main/div/div/div[1]/div[2]/form/div[7]/div/button').click()
+        time.sleep(1)
+        idriver.find_element(By.XPATH,'//*[@id="react-root"]/section/main/div/div/div[1]/div/div[4]/div/div/span/span[1]/select').click()
+        idriver.find_element(By.XPATH,'//*[@id="react-root"]/section/main/div/div/div[1]/div/div[4]/div/div/span/span[1]/select/option[8]').click()
+        idriver.find_element(By.XPATH,'//*[@id="react-root"]/section/main/div/div/div[1]/div/div[4]/div/div/span/span[2]/select').click()
+        idriver.find_element(By.XPATH,'//*[@id="react-root"]/section/main/div/div/div[1]/div/div[4]/div/div/span/span[2]/select/option[12]').click()
+        idriver.find_element(By.XPATH,'//*[@id="react-root"]/section/main/div/div/div[1]/div/div[4]/div/div/span/span[3]/select').click()
+        idriver.find_element(By.XPATH,'//*[@id="react-root"]/section/main/div/div/div[1]/div/div[4]/div/div/span/span[3]/select/option[36]').click()
+        idriver.find_element(By.XPATH,'//*[@id="react-root"]/section/main/div/div/div[1]/div/div[6]/button').click()
+        time.sleep(20)
+        code=driver.find_element(By.XPATH,'//*[@id="mail_1142788712"]/a/div[3]').text
+        code=code.split()
+        code=code[0]
+        print(code)
 class TiktokBot:
     async def countdown(t,self):
         while t:
@@ -55,6 +83,7 @@ class TiktokBot:
                     break
                 except:
                     pass
+
         checking_phone(TiktokBot)
         driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[1]/number-card/div/p[2]/a').click()
         driver.execute_script("window.open('');")
@@ -99,18 +128,19 @@ class TiktokBot:
                         print(recvtext)
                         recvtext=str(recvtext)
                         recvtext.startswith("[")
-                        if recvtext.startswith("["):
+                        if recvtext.startswith("[Tik"):
                             print(recvtext[9:15])
                             driver.switch_to.window(driver.window_handles[1])
                             self.phonefailed=False
                             recvtext=recvtext.split()
                             recvtext=recvtext[1]
                             driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/div/input').send_keys(recvtext)
-                            driver.find_element(By.XPATH,'/html/body/tiktok-cookie-banner//div/div[2]/button[2]').click()
                             driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/button').click()
+                            time.sleep(8)
                             for line in range(10):
                                 #clicking on the profile
-                                driver.find_element(By.XPATH,f'//*[@id="app"]/div[2]/div[2]/div[1]/div[{line}]/a')
+                                driver.find_element(By.XPATH,'//*[@id="app"]/div[2]/div[2]/div[1]/div[1]/div/div[1]/div[1]/a[2]/h3')
+                                driver.find_element(By.XPATH,f'//*[@id="app"]/div[2]/div[2]/div[1]/div[{line}]/div/div[1]/div[1]/a[2]').click()
                                 follower_count=driver.find_element(By.XPATH,'//*[@id="app"]/div[2]/div[2]/div/div[1]/h2[1]/div[2]/strong').text
                                 if "K" or "M" in follower_count:
                                     #if the follower count is in the thousands or the millions
@@ -119,11 +149,11 @@ class TiktokBot:
                             #going to profile and uploading
                             driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[4]').click()
                             time.sleep(1)
+
                             driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[4]/div/ul/li[1]/a').click()
                             driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[1]/a').click()
 
                         else:
-
                             driver.switch_to.window(driver.window_handles[1])
                             driver.get('https://www.tiktok.com/login/phone-or-email')
                             time.sleep(4)
@@ -140,41 +170,46 @@ class TiktokBot:
                             time.sleep(1)
                             driver.switch_to.window(driver.window_handles[0])
                             time.sleep(4)
-                            recvtext=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/messages/section/div/div/div/table/tbody/tr[1]/td[3]').text
+                            self.recvtext=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/messages/section/div/div/div/table/tbody/tr[1]/td[3]').text
                             time.sleep(1)
-                            recvtext=recvtext.split()
-                            recvtext=recvtext[1]
-                            driver.switch_to.window(driver.window_handles[1])
-                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[4]/div/div/input').send_keys(recvtext)
-                            time.sleep(1)
-                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
-                            time.sleep(3)
-                            driver.get("https://quackr.io/")
-                            while True:
-                                try:
-                                    self.vaildnumbers=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/home-page/section/div/div/div/nav/div[1]/div/p[2]').text
-                                    break
-                                except:
-                                    pass
-                        driver.switch_to.window(driver.window_handles[0])
-                        driver.get("https://quackr.io/temporary-numbers/united-kingdom/")
-                        time.sleep(7)
-                        print(f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]')
-                        self.phone=driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]').text
-                        current_num=f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]'
-                        driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]/a').click()
-                        driver.switch_to.window(driver.window_handles[1])
-                        temp_in=driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input')
-                        temp_in.clear()
-                        time.sleep(2)
-                        driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input').send_keys(self.phone[3:].replace(" ",""))
-                        time.sleep(2)
-                        driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
-                        time.sleep(3)
-                        driver.switch_to.window(driver.window_handles[0])
-                        # for _ in range(50):
-                            # time.sleep(2)
-                            # driver.refresh()
+                            if recvtext.startswith("[Tik"):
+                                recvtext=recvtext.split()
+                                recvtext=recvtext[1]
+                                driver.switch_to.window(driver.window_handles[1])
+                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[4]/div/div/input').send_keys(recvtext)
+                                time.sleep(1)
+                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
+                                time.sleep(3)
+                                time.sleep(8)
+                                for line in range(10):
+                                    #clicking on the profile
+                                    driver.find_element(By.XPATH,'//*[@id="app"]/div[2]/div[2]/div[1]/div[1]/div/div[1]/div[1]/a[2]/h3')
+                                    driver.find_element(By.XPATH,f'//*[@id="app"]/div[2]/div[2]/div[1]/div[{line}]/div/div[1]/div[1]/a[2]').click()
+                                    follower_count=driver.find_element(By.XPATH,'//*[@id="app"]/div[2]/div[2]/div/div[1]/h2[1]/div[2]/strong').text
+                                    if "K" or "M" in follower_count:
+                                        driver.find_element(By.XPATH,'//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[1]/div/div/a').click()
+                                driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[4]').click()
+                                time.sleep(1)
+
+                                driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[4]/div/ul/li[1]/a').click()
+                                driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[1]/a').click()
+                            else:
+                                driver.switch_to.window(driver.window_handles[0])
+                                driver.get("https://quackr.io/temporary-numbers/united-kingdom/")
+                                time.sleep(7)
+                                print(f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]')
+                                self.phone=driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]').text
+                                current_num=f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]'
+                                driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]/a').click()
+                                driver.switch_to.window(driver.window_handles[1])
+                                temp_in=driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input')
+                                temp_in.clear()
+                                time.sleep(2)
+                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input').send_keys(self.phone[3:].replace(" ",""))
+                                time.sleep(2)
+                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
+                                time.sleep(3)
+                                driver.switch_to.window(driver.window_handles[0])
             
                                 
             return go_through_the_vaildnumbers()
@@ -186,7 +221,7 @@ if "ti" in social_in:
     bot.phone()
     bot.tiktok()
     driver.switch_to.window(driver.window_handles[1])
-    recvtext=str(TiktokBot.recvtext).split()
+    recvtext=str(bot.recvtext).split()
     for nui in recvtext:
         try:
             nui=int(nui)
@@ -275,5 +310,6 @@ if "tw" in social_in:
         driver.find_element(By.XPATH,'//*[@id="SELECTOR_1"]').click()
         driver.find_element(By.XPATH,'//*[@id="SELECTOR_7"]/option[4]').click()
         driver.find_element(By.XPATH,'//*[@id="SELECTOR_8"]').click()
-    
+if "in" in social_in:
+    instabot=InstagramBot()
 input()
