@@ -7,7 +7,25 @@ driver = uc.Chrome(use_subprocess=True)
 orig_url="https://quackr.io/temporary-numbers/united-kingdom"
 driver.get("https://quackr.io/temporary-numbers/united-kingdom")
 time.sleep(3)
+import random
 global vaildnumbers
+options=uc.ChromeOptions()
+options.headless=True
+ndriver=uc.Chrome(use_subprocess=True)
+ndriver.get("https://www.goodhousekeeping.com/life/parenting/a37668901/top-baby-girl-names/")
+#//*[@id="main-content"]/div[2]/div[3]/ol[1]/li[2]/strong
+#//*[@id="main-content"]/div[2]/div[3]/ol[1]/li[1]/strong
+while True:
+    try:
+        ndriver.find_element(By.XPATH,'//*[@id="onetrust-accept-btn-handler"]').click()
+        break
+    except:
+        pass
+rn=random.randint(1,10)
+print(f'//*[@id="main-content"]/div[2]/div[2]/ol[1]/li[{rn}]/strong')
+global tiku
+tiku=ndriver.find_element(By.XPATH,f'//*[@id="main-content"]/div[2]/div[2]/ol[1]/li[{rn}]/strong').text
+ndriver.close()
 capt=False
 import time
 import asyncio
@@ -71,6 +89,7 @@ class TiktokBot:
         orig_url="https://quackr.io/temporary-numbers/united-kingdom"
         driver.get("https://quackr.io/temporary-numbers/united-kingdom")
         #set to "self"
+        time.sleep(1)
         self.vaildnumbers=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/country-page/section/div/h4[1]').text
         self.vaildnumbers=self.vaildnumbers.split()
         self.vaildnumbers=self.vaildnumbers[0]
@@ -113,6 +132,10 @@ class TiktokBot:
                 time.sleep(1)
                 def verication_code():
                     driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
+                    try:
+                        driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[4]/div[2]')
+                    except:
+                        self.phonefailed=True
                     driver.switch_to.window(driver.window_handles[0])
                     #Waiting for the verification code
                     time.sleep(30)
@@ -121,127 +144,143 @@ class TiktokBot:
 
             def go_through_the_vaildnumbers():
                     for number in range(self.vaildnumbers):
-                        asyncio.ensure_future(self.countdown(10))
-                 
-                        recvtext=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/messages/section/div/div/div/table/tbody/tr[1]/td[3]').text
-                        driver.refresh()
-                        print(recvtext)
-                        recvtext=str(recvtext)
-                        recvtext.startswith("[")
-                        if recvtext.startswith("[Tik"):
-                            print(recvtext[9:15])
-                            driver.switch_to.window(driver.window_handles[1])
-                            self.phonefailed=False
-                            recvtext=recvtext.split()
-                            recvtext=recvtext[1]
-                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/div/input').send_keys(recvtext)
-                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/button').click()
-                            time.sleep(8)
-                            for line in range(10):
-                                #clicking on the profile
-                                driver.find_element(By.XPATH,'//*[@id="app"]/div[2]/div[2]/div[1]/div[1]/div/div[1]/div[1]/a[2]/h3')
-                                driver.find_element(By.XPATH,f'//*[@id="app"]/div[2]/div[2]/div[1]/div[{line}]/div/div[1]/div[1]/a[2]').click()
-                                follower_count=driver.find_element(By.XPATH,'//*[@id="app"]/div[2]/div[2]/div/div[1]/h2[1]/div[2]/strong').text
-                                if "K" or "M" in follower_count:
-                                    #if the follower count is in the thousands or the millions
-                                    driver.find_element(By.XPATH,'//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[1]/div/div/a').click()
-                                    #clicks into the first video
-                            #going to profile and uploading
-                            driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[4]').click()
-                            time.sleep(1)
-
-                            driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[4]/div/ul/li[1]/a').click()
-                            driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[1]/a').click()
-
-                        else:
-                            driver.switch_to.window(driver.window_handles[1])
-                            driver.get('https://www.tiktok.com/login/phone-or-email')
-                            time.sleep(4)
-                            temp_in=driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div/div[2]/input')
-                            temp_in.clear()
-                            temp_in.send_keys(self.phone[3:])
-                            time.sleep(2)
-                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div/div[1]/div').click()
-                            time.sleep(1)
-                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div/div[1]/div[2]/div[1]/input').send_keys("united kin")
-                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[3]/div/div[1]/div[2]/div[1]/input').send_keys(Keys.RETURN)
-                            time.sleep(2)
-                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[4]/div/button').click()
-                            time.sleep(1)
-                            driver.switch_to.window(driver.window_handles[0])
-                            time.sleep(4)
-                            self.recvtext=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/messages/section/div/div/div/table/tbody/tr[1]/td[3]').text
-                            time.sleep(1)
+                        if number == 0:
+                            asyncio.ensure_future(self.countdown(10))
+                            number=number+1
+                            recvtext=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/messages/section/div/div/div/table/tbody/tr[1]/td[3]').text
+                            driver.refresh()
+                            print(recvtext)
+                            recvtext=str(recvtext)
+                            recvtext.startswith("[")
                             if recvtext.startswith("[Tik"):
+                                print(recvtext[9:15])
+                                driver.switch_to.window(driver.window_handles[1])
+                                self.phonefailed=False
                                 recvtext=recvtext.split()
                                 recvtext=recvtext[1]
-                                driver.switch_to.window(driver.window_handles[1])
-                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[4]/div/div/input').send_keys(recvtext)
-                                time.sleep(1)
-                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
+                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/div/input').send_keys(recvtext)
+                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/button').click()
+                                driver.maximize_window()
                                 time.sleep(3)
-                                time.sleep(8)
+
+                                #going to profile
+                                driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[4]').click()
+                                driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[4]/div/ul/li[1]/a').click()
+                                time.sleep(5)
+                                driver.find_element(By.XPATH,'//*[@id="app"]/div[2]/div[2]/div/div[1]/div[1]/div[2]/div/button').click()
+                                time.sleep(12)
+                                #clearing the text box
+                                p.moveTo(x=947,y=637)
+                                p.click()
+                                for line in range(20):
+                                    p.press("backspace")
+                                global tiku
+                                tiku=tiku+"_CSVL"
+                                for line in tiku:
+                                    p.press(line)
+
+                                p.moveTo(x=863,y=746)
+                                p.click()
+                                for line in range(20):
+                                    p.press("backspace")
+                                for letter in "if we commented on your post, check our post for a collab! :)":
+                                    p.press(letter)
+                                p.moveTo(x=1228,y=890)
+                                p.click()
+
+                                #commenting
                                 for line in range(10):
                                     #clicking on the profile
-                                    driver.find_element(By.XPATH,'//*[@id="app"]/div[2]/div[2]/div[1]/div[1]/div/div[1]/div[1]/a[2]/h3')
-                                    driver.find_element(By.XPATH,f'//*[@id="app"]/div[2]/div[2]/div[1]/div[{line}]/div/div[1]/div[1]/a[2]').click()
+                                    current_user=driver.find_element(By.XPATH,f'//*[@id="app"]/div[2]/div[2]/div[1]/div[{line+1}]/div/div[1]/div[1]/a[2]/h3').text
+                                    print(current_user)
+                                    driver.get(f"https://www.tiktok.com/@{current_user}")
                                     follower_count=driver.find_element(By.XPATH,'//*[@id="app"]/div[2]/div[2]/div/div[1]/h2[1]/div[2]/strong').text
                                     if "K" or "M" in follower_count:
                                         driver.find_element(By.XPATH,'//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[1]/div/div/a').click()
-                                driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[4]').click()
-                                time.sleep(1)
+                                        driver.find_element(By.XPATH,'//*[@id="app"]/div[2]/div[3]/div[2]/div[4]/div/div[1]/div/div[1]').send_keys("check our post for a collab! :)")
+                                        #clicks into the first video
 
-                                driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[4]/div/ul/li[1]/a').click()
-                                driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[1]/a').click()
                             else:
-                                driver.switch_to.window(driver.window_handles[0])
-                                driver.get("https://quackr.io/temporary-numbers/united-kingdom/")
-                                time.sleep(7)
-                                print(f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]')
-                                self.phone=driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]').text
-                                current_num=f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]'
-                                driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number+1}]/number-card/div/p[2]/a').click()
+                                pass
+                        else:
+                            driver.switch_to.window(driver.window_handles[0])
+                            driver.get("https://quackr.io/temporary-numbers/united-kingdom")
+                            driver.find_element(By.XPATH,f'//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[{number}]/number-card/div/p[2]/a').click()
+                            time.sleep(2)
+                            self.phone=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/messages/section/div/div/div/h1').text
+                            self.phone=self.phone[3:]
+                            driver.switch_to.window(driver.window_handles[1])
+                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input').clear()
+                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input').send_keys(self.phone)
+                            time.sleep(2)
+                            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
+                            driver.switch_to.window(driver.window_handles[0])
+                            asyncio.ensure_future(self.countdown(10))
+                            recvtext=driver.find_element(By.XPATH,'//*[@id="wrapper"]/div[1]/main/messages/section/div/div/div/table/tbody/tr[1]/td[3]').text
+                            driver.refresh()
+                            print(recvtext)
+                            recvtext=str(recvtext)
+                            recvtext.startswith("[")
+                            if recvtext.startswith("[Tik"):
+                                print(recvtext[9:15])
                                 driver.switch_to.window(driver.window_handles[1])
-                                temp_in=driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input')
-                                temp_in.clear()
-                                time.sleep(2)
-                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[6]/div/div[2]/input').send_keys(self.phone[3:].replace(" ",""))
-                                time.sleep(2)
-                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/button').click()
+                                self.phonefailed=False
+                                recvtext=recvtext.split()
+                                recvtext=recvtext[1]
+                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/div/input').send_keys(recvtext)
+                                driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/button').click()
+                                driver.maximize_window()
                                 time.sleep(3)
-                                driver.switch_to.window(driver.window_handles[0])
+
+                                #going to profile
+                                driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[4]').click()
+                                driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[4]/div/ul/li[1]/a').click()
+                                time.sleep(5)
+                                driver.find_element(By.XPATH,'//*[@id="app"]/div[2]/div[2]/div/div[1]/div[1]/div[2]/div/button').click()
+                                time.sleep(12)
+                                #clearing the text box
+                                p.moveTo(x=947,y=637)
+                                p.click()
+                                for line in range(20):
+                                    p.press("backspace")
+                                tiku=tiku+"_CSVL"
+                                for line in tiku:
+                                    p.press(line)
+
+                                p.moveTo(x=863,y=746)
+                                p.click()
+                                for line in range(20):
+                                    p.press("backspace")
+                                for letter in "if we commented on your post, check our post for a collab! :)":
+                                    p.press(letter)
+                                p.moveTo(x=1228,y=890)
+                                p.click()
+
+                                #commenting
+                                for line in range(10):
+                                    #clicking on the profile
+                                    current_user=driver.find_element(By.XPATH,f'//*[@id="app"]/div[2]/div[2]/div[1]/div[{line+1}]/div/div[1]/div[1]/a[2]/h3').text
+                                    print(current_user)
+                                    driver.get(f"https://www.tiktok.com/@{current_user}")
+                                    follower_count=driver.find_element(By.XPATH,'//*[@id="app"]/div[2]/div[2]/div/div[1]/h2[1]/div[2]/strong').text
+                                    if "K" or "M" in follower_count:
+                                        driver.find_element(By.XPATH,'//*[@id="app"]/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[1]/div/div/a').click()
+                                        driver.find_element(By.XPATH,'//*[@id="app"]/div[2]/div[3]/div[2]/div[4]/div/div[1]/div/div[1]').send_keys("check our post for a collab! :)")
+                                        #clicks into the first video
+
             
                                 
             return go_through_the_vaildnumbers()
 social_in=input("[SOCIAL] ")
+#//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[1]/number-card/div/p[2]/a
+#//*[@id="wrapper"]/div[1]/main/country-page/section/div/div[2]/div[2]/number-card/div/p[2]/a
 print(social_in.lower())
 if "ti" in social_in:
     bot=TiktokBot()
     bot.Fr()
     bot.phone()
     bot.tiktok()
-    driver.switch_to.window(driver.window_handles[1])
-    recvtext=str(bot.recvtext).split()
-    for nui in recvtext:
-        try:
-            nui=int(nui)
-        except:
-            pass
-    while True:
-        try:
-            driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/div[7]/div/div/input').send_keys(nui)
-            break
-        except:
-            pass
-    driver.find_element(By.XPATH,'//*[@id="loginContainer"]/div[1]/form/button').click()
-    while True:
-        try:
-            driver.find_element(By.XPATH,'//*[@id="app"]/div[1]/div/div[2]/div[1]/a').click()
-            break
-        except:
-            pass
-    driver.find_element(By.XPATH,'/html/body/tiktok-cookie-banner//div/div[2]/button[2]').click()
-if "tw" in social_in:
+elif "tw" in social_in:
     pdriver= uc.Chrome(use_subprocess=True)
     ndriver= uc.Chrome(use_subprocess=True)
     orig_url="https://quackr.io/temporary-numbers/united-kingdom"
@@ -310,6 +349,6 @@ if "tw" in social_in:
         driver.find_element(By.XPATH,'//*[@id="SELECTOR_1"]').click()
         driver.find_element(By.XPATH,'//*[@id="SELECTOR_7"]/option[4]').click()
         driver.find_element(By.XPATH,'//*[@id="SELECTOR_8"]').click()
-if "in" in social_in:
+elif "in" in social_in:
     instabot=InstagramBot()
 input()
