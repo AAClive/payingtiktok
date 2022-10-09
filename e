@@ -1,7 +1,14 @@
 import time
 from tkinter import *
 from tkinter import ttk
-from pywinauto.application import Application
+from selenium.webdriver.common.proxy import Proxy, ProxyType
+proxy=Proxy()
+proxy_ip_port = 'ip:port'
+proxy.proxy_tyep=ProxyType.MANUAL
+proxy.http_proxy = proxy_ip_port
+proxy.ssl_proxy = proxy_ip_port
+capabilities = webdriver.DesiredCapabilities.CHROME
+proxy.add_to_capabilities(capabilities)
 #app=Application(backend="win32").start('C:\Program Files\BlueStacks_nxt\HD-Player.exe')
 time.sleep(1)
 #app=Application(backend="win32").connect(title='BlueStacks App Player')
@@ -20,14 +27,13 @@ time.sleep(1)
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import undetected_chromedriver.v2 as uc
-import pyautogui as p
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 import random
-ndriver=uc.Chrome(use_subprocess=True)
+ndriver=uc.Chrome(use_subprocess=True,desired_capabilities=capabilities)
 ndriver.get("https://www.behindthename.com/random/random.php?gender=both&number=2&sets=1&surname=&norare=yes&nodiminutives=yes&all=yes")
 time.sleep(4)
 ndriver.find_element(By.XPATH,'//*[@id="__cmp_body"]/div/div/div[2]/a[2]').click()
@@ -118,5 +124,4 @@ driver.find_element(By.XPATH,'//*[@id="AQAAAAAAAQABAAAAAAARKwAAAAA="]/div/div/di
 #finding the verifcation code
 driver.find_element(By.XPATH,'//*[@id="ReadingPaneContainerId"]/div/div/div/div[2]/div/div[2]/div[1]/div/div/div/div/div[3]/div/div/div/div[1]/div[3]/p[2]').text
 input()
-
 
